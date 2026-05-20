@@ -1,0 +1,213 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\ReadLog\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\readlog.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:readlog.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|C:\\Users\\User\\source\\repos\\ReadLog\\libraryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:libraryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|C:\\Users\\User\\source\\repos\\ReadLog\\addeditbookform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:addeditbookform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\addeditbookform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:addeditbookform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\libraryform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:libraryform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\readinggoalform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:readinggoalform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|C:\\Users\\User\\source\\repos\\ReadLog\\readinggoalform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:readinggoalform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\libraryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:libraryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|C:\\Users\\User\\source\\repos\\ReadLog\\bookdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:bookdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\bookdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:bookdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\dashboardform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:dashboardform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ReadLog.csproj",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\ReadLog.csproj",
+              "RelativeDocumentMoniker": "ReadLog.csproj",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\ReadLog.csproj",
+              "RelativeToolTip": "ReadLog.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-20T10:54:02.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AddEditBookForm.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\AddEditBookForm.cs",
+              "RelativeDocumentMoniker": "AddEditBookForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\AddEditBookForm.cs",
+              "RelativeToolTip": "AddEditBookForm.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T05:50:11.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AddEditBookForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\AddEditBookForm.cs",
+              "RelativeDocumentMoniker": "AddEditBookForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\AddEditBookForm.cs [Design]",
+              "RelativeToolTip": "AddEditBookForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T05:50:08.422Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LibraryForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\LibraryForm.Designer.cs",
+              "RelativeDocumentMoniker": "LibraryForm.Designer.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\LibraryForm.Designer.cs",
+              "RelativeToolTip": "LibraryForm.Designer.cs",
+              "ViewState": "AgIAAO8AAAAAAAAAAAAmwPUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T13:13:25.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LibraryForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\LibraryForm.cs",
+              "RelativeDocumentMoniker": "LibraryForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\LibraryForm.cs [Design]",
+              "RelativeToolTip": "LibraryForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T12:43:22.181Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ReadingGoalForm.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\ReadingGoalForm.cs",
+              "RelativeDocumentMoniker": "ReadingGoalForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\ReadingGoalForm.cs",
+              "RelativeToolTip": "ReadingGoalForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T05:53:18.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReadingGoalForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\ReadingGoalForm.cs",
+              "RelativeDocumentMoniker": "ReadingGoalForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\ReadingGoalForm.cs [Design]",
+              "RelativeToolTip": "ReadingGoalForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T12:33:20.506Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LibraryForm.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\LibraryForm.cs",
+              "RelativeDocumentMoniker": "LibraryForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\LibraryForm.cs",
+              "RelativeToolTip": "LibraryForm.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwKAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-16T14:00:23.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BookDetailForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\BookDetailForm.cs",
+              "RelativeDocumentMoniker": "BookDetailForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\BookDetailForm.cs [Design]",
+              "RelativeToolTip": "BookDetailForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-16T13:14:51.522Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BookDetailForm.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\BookDetailForm.cs",
+              "RelativeDocumentMoniker": "BookDetailForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\BookDetailForm.cs",
+              "RelativeToolTip": "BookDetailForm.cs",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAqwMYAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-16T13:55:26.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DashboardForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\DashboardForm.Designer.cs",
+              "RelativeDocumentMoniker": "DashboardForm.Designer.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\DashboardForm.Designer.cs",
+              "RelativeToolTip": "DashboardForm.Designer.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAYwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-16T14:49:12.793Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DatabaseHelper.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\DatabaseHelper.cs",
+              "RelativeDocumentMoniker": "DatabaseHelper.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\DatabaseHelper.cs",
+              "RelativeToolTip": "DatabaseHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-16T14:24:18.726Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

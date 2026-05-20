@@ -1,0 +1,274 @@
+﻿namespace ReadLog
+{
+    partial class DashboardForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            label1 = new Label();
+            btnLibrary = new Button();
+            btnAddBook = new Button();
+            btnLogout = new Button();
+            panelTotalRead = new Panel();
+            lblTotalRead = new Label();
+            label2 = new Label();
+            panelCurrentlyReading = new Panel();
+            lblCurrentlyReading = new Label();
+            label4 = new Label();
+            panelGoal = new Panel();
+            lblGoal = new Label();
+            label5 = new Label();
+            progressGoal = new ProgressBar();
+            lblGoalPercent = new Label();
+            lstRecentBooks = new ListBox();
+            label3 = new Label();
+            btnReadingGoal = new Button();
+            panelTotalRead.SuspendLayout();
+            panelCurrentlyReading.SuspendLayout();
+            panelGoal.SuspendLayout();
+            SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(309, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(138, 32);
+            label1.TabIndex = 0;
+            label1.Text = "Dashboard";
+            // 
+            // btnLibrary
+            // 
+            btnLibrary.Location = new Point(83, 75);
+            btnLibrary.Name = "btnLibrary";
+            btnLibrary.Size = new Size(125, 47);
+            btnLibrary.TabIndex = 1;
+            btnLibrary.Text = "Library";
+            btnLibrary.UseVisualStyleBackColor = true;
+            btnLibrary.Click += btnLibrary_Click;
+            // 
+            // btnAddBook
+            // 
+            btnAddBook.Location = new Point(232, 75);
+            btnAddBook.Name = "btnAddBook";
+            btnAddBook.Size = new Size(140, 47);
+            btnAddBook.TabIndex = 2;
+            btnAddBook.Text = "Add Book";
+            btnAddBook.UseVisualStyleBackColor = true;
+            btnAddBook.Click += btnAddBook_Click;
+            // 
+            // btnLogout
+            // 
+            btnLogout.Location = new Point(545, 75);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(126, 47);
+            btnLogout.TabIndex = 3;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
+            // 
+            // panelTotalRead
+            // 
+            panelTotalRead.BackColor = Color.LightGray;
+            panelTotalRead.Controls.Add(lblTotalRead);
+            panelTotalRead.Controls.Add(label2);
+            panelTotalRead.Location = new Point(83, 151);
+            panelTotalRead.Name = "panelTotalRead";
+            panelTotalRead.Size = new Size(169, 103);
+            panelTotalRead.TabIndex = 4;
+            // 
+            // lblTotalRead
+            // 
+            lblTotalRead.AutoSize = true;
+            lblTotalRead.Location = new Point(54, 58);
+            lblTotalRead.Name = "lblTotalRead";
+            lblTotalRead.Size = new Size(32, 25);
+            lblTotalRead.TabIndex = 6;
+            lblTotalRead.Text = "12";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(19, 16);
+            label2.Name = "label2";
+            label2.Size = new Size(147, 25);
+            label2.TabIndex = 5;
+            label2.Text = "Total Books Read";
+            // 
+            // panelCurrentlyReading
+            // 
+            panelCurrentlyReading.BackColor = Color.LightGray;
+            panelCurrentlyReading.Controls.Add(lblCurrentlyReading);
+            panelCurrentlyReading.Controls.Add(label4);
+            panelCurrentlyReading.Location = new Point(278, 151);
+            panelCurrentlyReading.Name = "panelCurrentlyReading";
+            panelCurrentlyReading.Size = new Size(169, 103);
+            panelCurrentlyReading.TabIndex = 7;
+            // 
+            // lblCurrentlyReading
+            // 
+            lblCurrentlyReading.AutoSize = true;
+            lblCurrentlyReading.Location = new Point(54, 58);
+            lblCurrentlyReading.Name = "lblCurrentlyReading";
+            lblCurrentlyReading.Size = new Size(22, 25);
+            lblCurrentlyReading.TabIndex = 6;
+            lblCurrentlyReading.Text = "7";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(14, 16);
+            label4.Name = "label4";
+            label4.Size = new Size(152, 25);
+            label4.TabIndex = 5;
+            label4.Text = "Currently Reading";
+            // 
+            // panelGoal
+            // 
+            panelGoal.BackColor = Color.LightGray;
+            panelGoal.Controls.Add(lblGoal);
+            panelGoal.Controls.Add(label5);
+            panelGoal.Location = new Point(495, 151);
+            panelGoal.Name = "panelGoal";
+            panelGoal.Size = new Size(176, 103);
+            panelGoal.TabIndex = 8;
+            // 
+            // lblGoal
+            // 
+            lblGoal.AutoSize = true;
+            lblGoal.Location = new Point(54, 58);
+            lblGoal.Name = "lblGoal";
+            lblGoal.Size = new Size(59, 25);
+            lblGoal.TabIndex = 6;
+            lblGoal.Text = "7 / 12";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(54, 16);
+            label5.Name = "label5";
+            label5.Size = new Size(48, 25);
+            label5.TabIndex = 5;
+            label5.Text = "Goal";
+            // 
+            // progressGoal
+            // 
+            progressGoal.Location = new Point(83, 279);
+            progressGoal.Name = "progressGoal";
+            progressGoal.Size = new Size(588, 18);
+            progressGoal.TabIndex = 9;
+            progressGoal.Value = 58;
+            // 
+            // lblGoalPercent
+            // 
+            lblGoalPercent.AutoSize = true;
+            lblGoalPercent.Location = new Point(545, 300);
+            lblGoalPercent.Name = "lblGoalPercent";
+            lblGoalPercent.Size = new Size(126, 25);
+            lblGoalPercent.TabIndex = 10;
+            lblGoalPercent.Text = "58% complete";
+            // 
+            // lstRecentBooks
+            // 
+            lstRecentBooks.FormattingEnabled = true;
+            lstRecentBooks.Items.AddRange(new object[] { "Atomic Habits", "Dune", "Clean Code", "Deep Work", "Rich Dad Poor Dad" });
+            lstRecentBooks.Location = new Point(83, 372);
+            lstRecentBooks.Name = "lstRecentBooks";
+            lstRecentBooks.Size = new Size(588, 204);
+            lstRecentBooks.TabIndex = 11;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(83, 344);
+            label3.Name = "label3";
+            label3.Size = new Size(190, 25);
+            label3.TabIndex = 12;
+            label3.Text = "Recently Added Books";
+            // 
+            // btnReadingGoal
+            // 
+            btnReadingGoal.Location = new Point(394, 75);
+            btnReadingGoal.Name = "btnReadingGoal";
+            btnReadingGoal.Size = new Size(126, 47);
+            btnReadingGoal.TabIndex = 13;
+            btnReadingGoal.Text = "Set Goal";
+            btnReadingGoal.UseVisualStyleBackColor = true;
+            btnReadingGoal.Click += btnReadingGoal_Click;
+            // 
+            // DashboardForm
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(778, 694);
+            Controls.Add(btnReadingGoal);
+            Controls.Add(label3);
+            Controls.Add(lstRecentBooks);
+            Controls.Add(lblGoalPercent);
+            Controls.Add(progressGoal);
+            Controls.Add(panelGoal);
+            Controls.Add(panelCurrentlyReading);
+            Controls.Add(panelTotalRead);
+            Controls.Add(btnLogout);
+            Controls.Add(btnAddBook);
+            Controls.Add(btnLibrary);
+            Controls.Add(label1);
+            MaximizeBox = false;
+            Name = "DashboardForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            panelTotalRead.ResumeLayout(false);
+            panelTotalRead.PerformLayout();
+            panelCurrentlyReading.ResumeLayout(false);
+            panelCurrentlyReading.PerformLayout();
+            panelGoal.ResumeLayout(false);
+            panelGoal.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Label label1;
+        private Button btnLibrary;
+        private Button btnAddBook;
+        private Button btnLogout;
+        private Panel panelTotalRead;
+        private Label lblTotalRead;
+        private Label label2;
+        private Panel panelCurrentlyReading;
+        private Label lblCurrentlyReading;
+        private Label label4;
+        private Panel panelGoal;
+        private Label lblGoal;
+        private Label label5;
+        private ProgressBar progressGoal;
+        private Label lblGoalPercent;
+        private ListBox lstRecentBooks;
+        private Label label3;
+        private Button btnReadingGoal;
+    }
+}
