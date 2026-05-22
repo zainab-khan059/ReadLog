@@ -1,0 +1,28 @@
+﻿=========================================
+READLOG APPLICATION DEPLOYMENT & SETUP
+=========================================
+
+1. SYSTEM PREREQUISITES
+------------------------
+Before running ReadLog.exe, the target machine MUST have the following installed:
+* .NET Desktop Runtime (matching your project's version, e.g., .NET 6.0 / 8.0 or .NET Framework 4.8)
+* Microsoft SQL Server Express LocalDB (Crucial for the database to attach!)
+
+2. DATABASE DEPLOYMENT SETUP
+----------------------------
+This application uses a LocalDB database file (ReadLogDB.mdf).
+By default, the connection string points to:
+C:\Users\User\source\repos\ReadLog\Database\ReadLogDB.mdf
+
+If you move the application folder to a different path or a different computer:
+1. Locate the 'ReadLog.exe.config' file in the installation directory.
+2. Open it in Notepad.
+3. Find the connectionString attribute and update the "AttachDbFilename" path 
+   to match the exact location of 'ReadLogDB.mdf' on the new computer.
+
+3. HOW TO LAUNCH
+----------------
+* Navigate to the build output directory (e.g., /bin/Release/).
+* Ensure 'ReadLogDB.mdf' and 'ReadLogDB_log.ldf' are inside the 'Database' folder.
+* Double-click 'ReadLog.exe' to run.
+*

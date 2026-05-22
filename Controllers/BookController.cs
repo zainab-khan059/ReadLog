@@ -13,9 +13,8 @@ namespace ReadLog.Controllers
         public List<Book> GetAllBooks()
         {
             List<Book> bookList = new List<Book>();
-            string query = "SELECT * FROM Books"; // Make sure your database table is named Books!
+            string query = "SELECT Id AS BookID, Title, Author, Genre, ReadingStatus, TotalPages, CurrentPage FROM Books";
 
-            // This calls the DatabaseHelper code you pasted earlier!
             DataTable dt = DatabaseHelper.ExecuteQuery(query);
 
             // Turn the database rows into clean C# Book objects
@@ -23,7 +22,8 @@ namespace ReadLog.Controllers
             {
                 Book book = new Book
                 {
-                    BookID = Convert.ToInt32(row["Id"]),
+                    // Fixed: Changed row["Id"] to row["BookID"] to match the SQL query alias above
+                    BookID = Convert.ToInt32(row["BookID"]),
                     Title = row["Title"].ToString(),
                     Author = row["Author"].ToString()
                 };
@@ -34,7 +34,7 @@ namespace ReadLog.Controllers
         }
 
         // 2. Tool to ADD a new book to the database
-        public bool AddBook(string title, string author)
+        public bool AddBook(string title, string author, string genre, string readingStatus, int totalPages, int currentPage)
         {
             // Business Rule: Don't allow empty titles or authors
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author))
@@ -42,12 +42,16 @@ namespace ReadLog.Controllers
                 return false;
             }
 
-            string query = "INSERT INTO Books (Title, Author) VALUES (@Title, @Author)";
+            string query = "INSERT INTO Books (Title, Author, Genre, ReadingStatus, TotalPages, CurrentPage) VALUES (@Title, @Author, @Genre, @ReadingStatus, @TotalPages, @CurrentPage)";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@Title", title),
-                new SqlParameter("@Author", author)
+        new SqlParameter("@Title", title),
+        new SqlParameter("@Author", author),
+        new SqlParameter("@Genre", genre),
+        new SqlParameter("@ReadingStatus", readingStatus),
+        new SqlParameter("@TotalPages", totalPages),
+        new SqlParameter("@CurrentPage", currentPage)
             };
 
             // This executes the insert query using your helper
@@ -73,7 +77,7 @@ namespace ReadLog.Controllers
         public List<string> GetRecentBookTitles()
         {
             List<string> titles = new List<string>();
-            string query = "SELECT TOP 5 Title FROM Books ORDER BY BookID DESC"; // Using BookID based on your model update!
+            string query = "SELECT TOP 5 Id AS BookID, Title FROM Books ORDER BY Id DESC"; // Using BookID based on your model update!
 
             DataTable dt = DatabaseHelper.ExecuteQuery(query);
             foreach (DataRow row in dt.Rows)
@@ -85,7 +89,7 @@ namespace ReadLog.Controllers
         // 1. Fetch all books from the database as a DataTable
         public DataTable GetLibraryBooks()
         {
-            string query = "SELECT Id, Title, Author, Genre, ReadingStatus, Rating FROM Books";
+            string query = "SELECT Id AS BookID, Title, Author, Genre, ReadingStatus, Rating FROM Books";
             return DatabaseHelper.ExecuteQuery(query);
         }
 
@@ -103,7 +107,7 @@ namespace ReadLog.Controllers
         // 1. Fetch data for an individual book details profile
         public DataRow GetBookDetails(int bookId)
         {
-            string query = "SELECT * FROM Books WHERE Id = @Id";
+            string query = "SELECT Id AS BookID, Title, Author, Genre, ReadingStatus, TotalPages, CurrentPage FROM Books WHERE Id = @Id";
             SqlParameter[] parameters = { new SqlParameter("@Id", bookId) };
 
             DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
@@ -153,23 +157,25 @@ namespace ReadLog.Controllers
         }
 
         // 2. Update an existing book record by its Id
-        public bool UpdateBook(int id, string title, string author, string genre, int publicationYear, string readingStatus, int totalPages)
+        public bool UpdateBook(int bookId, string title, string author, string genre, int year, string readingStatus, int totalPages)
         {
-            string query = @"UPDATE Books 
-                    SET Title=@Title, Author=@Author, Genre=@Genre, PublicationYear=@PublicationYear, ReadingStatus=@ReadingStatus, TotalPages=@TotalPages 
-                    WHERE Id=@Id";
+            // Uses 'PublicationYear' to perfectly align with your SQL database designer schema
+            string query = "UPDATE Books SET Title = @Title, Author = @Author, Genre = @Genre, PublicationYear = @PublicationYear, ReadingStatus = @ReadingStatus, TotalPages = @TotalPages WHERE Id = @Id";
 
-            System.Data.SqlClient.SqlParameter[] parameters = {
-        new System.Data.SqlClient.SqlParameter("@Id", id),
-        new System.Data.SqlClient.SqlParameter("@Title", title),
-        new System.Data.SqlClient.SqlParameter("@Author", author),
-        new System.Data.SqlClient.SqlParameter("@Genre", genre),
-        new System.Data.SqlClient.SqlParameter("@PublicationYear", publicationYear),
-        new System.Data.SqlClient.SqlParameter("@ReadingStatus", readingStatus),
-        new System.Data.SqlClient.SqlParameter("@TotalPages", totalPages)
-    };
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+        new SqlParameter("@Id", bookId),
+        new SqlParameter("@Title", title),
+        new SqlParameter("@Author", author),
+        new SqlParameter("@Genre", genre),
+        new SqlParameter("@PublicationYear", year), // Maps to the numerical year control value
+        new SqlParameter("@ReadingStatus", readingStatus),
+        new SqlParameter("@TotalPages", totalPages)
+            };
 
-            return ReadLog.Database.DatabaseHelper.ExecuteNonQuery(query, parameters) > 0;
+            int rowsAffected = DatabaseHelper.ExecuteNonQuery(query, parameters);
+            return rowsAffected > 0;
         }
+
     }
 }

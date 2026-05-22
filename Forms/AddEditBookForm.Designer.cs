@@ -255,7 +255,7 @@
             Controls.Add(label1);
             Name = "AddEditBookForm";
             StartPosition = FormStartPosition.CenterScreen;
-            FormClosed += AddEditBookForm_FormClosed;
+            // FormClosed += AddEditBookForm_FormClosed;
             Load += AddEditBookForm_Load;
             ((System.ComponentModel.ISupportInitialize)numYear).EndInit();
             ((System.ComponentModel.ISupportInitialize)numPages).EndInit();

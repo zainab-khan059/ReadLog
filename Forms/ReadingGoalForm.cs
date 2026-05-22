@@ -7,7 +7,7 @@ namespace ReadLog.Forms
 {
     public partial class ReadingGoalForm : Form
     {
-        private Form dashboard;
+   
 
         // Connect to our middleman tier controller
         private GoalController _goalController = new GoalController();
@@ -18,13 +18,7 @@ namespace ReadLog.Forms
             LoadGoalHistory();
         }
 
-        public ReadingGoalForm(Form dash)
-        {
-            InitializeComponent();
-            dashboard = dash;
-            LoadGoalHistory(); // Fixed to ensure history updates when opened via Dashboard!
-        }
-
+        
         // 1. LOAD REAL GOAL HISTORY FROM CONTROLLER
         private void LoadGoalHistory()
         {
@@ -102,12 +96,6 @@ namespace ReadLog.Forms
             }
         }
 
-        private void ReadingGoalForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (dashboard != null)
-            {
-                dashboard.Show();
-            }
-        }
+       
     }
 }

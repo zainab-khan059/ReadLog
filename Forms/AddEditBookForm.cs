@@ -11,7 +11,6 @@ namespace ReadLog.Forms
     {
         private int bookId = -1;
         private bool isEditMode = false;
-        private Form dashboard;
 
         // Connect to our middleman architecture tier
         private BookController _bookController = new BookController();
@@ -33,13 +32,7 @@ namespace ReadLog.Forms
             LoadBookData();
         }
 
-        public AddEditBookForm(Form dash)
-        {
-            InitializeComponent();
-            InitializeDropdownOptions();
-            dashboard = dash;
-        }
-
+        
         // Keep dropdown setup bundled cleanly together
         private void InitializeDropdownOptions()
         {
@@ -131,12 +124,7 @@ namespace ReadLog.Forms
             }
         }
 
-        private void AddEditBookForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (dashboard != null)
-                dashboard.Show();
-        }
-
+       
         // Form_Load handles double verification safely
         private void AddEditBookForm_Load(object sender, EventArgs e)
         {

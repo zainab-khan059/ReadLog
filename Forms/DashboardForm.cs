@@ -74,19 +74,20 @@ namespace ReadLog.Forms
             libForm.Show();
         }
 
+        // Inside DashboardForm.cs - Opening Add Book Window
         private void btnAddBook_Click(object sender, EventArgs e)
         {
-            AddEditBookForm form = new AddEditBookForm();
-            this.Hide();
-            form.Show();
+            AddEditBookForm editForm = new AddEditBookForm(-1);
+            editForm.ShowDialog(); // Keeps dashboard running safely behind it
+           
         }
 
+        // Inside DashboardForm.cs - Opening Reading Goal Window (Fixed Name!)
         private void btnReadingGoal_Click(object sender, EventArgs e)
         {
-            ReadingGoalForm form = new ReadingGoalForm();
-            this.Hide();
-            form.Show();
-        }
+            ReadingGoalForm goalForm = new ReadingGoalForm();
+            goalForm.ShowDialog(); // Keeps dashboard running safely behind it
+                  }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {

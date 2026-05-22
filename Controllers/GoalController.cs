@@ -61,5 +61,11 @@ namespace ReadLog.Controllers
             DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
             return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
+        public DataTable GetLatestGoalData()
+        {
+            // Fetches your tracking data to fill the dashboard grid view
+            string query = "SELECT TOP 1 TargetBooks, BooksCompleted FROM ReadingGoals ORDER BY Id DESC";
+            return DatabaseHelper.ExecuteQuery(query);
+        }
     }
 }

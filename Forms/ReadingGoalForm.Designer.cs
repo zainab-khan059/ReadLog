@@ -165,7 +165,7 @@
             MaximizeBox = false;
             Name = "ReadingGoalForm";
             StartPosition = FormStartPosition.CenterScreen;
-            FormClosed += ReadingGoalForm_FormClosed;
+            //FormClosed += ReadingGoalForm_FormClosed;
             ((System.ComponentModel.ISupportInitialize)numGoal).EndInit();
             ((System.ComponentModel.ISupportInitialize)numCompleted).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvHistory).EndInit();
