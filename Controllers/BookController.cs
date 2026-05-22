@@ -100,5 +100,39 @@ namespace ReadLog.Controllers
             int rowsAffected = DatabaseHelper.ExecuteNonQuery(query, parameters);
             return rowsAffected > 0;
         }
+        // 1. Fetch data for an individual book details profile
+        public DataRow GetBookDetails(int bookId)
+        {
+            string query = "SELECT * FROM Books WHERE Id = @Id";
+            SqlParameter[] parameters = { new SqlParameter("@Id", bookId) };
+
+            DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
+            return dt.Rows.Count > 0 ? dt.Rows[0] : null;
+        }
+
+        // 2. Save book scoring reviews and notes
+        public bool UpdateBookReview(int bookId, int rating, string review)
+        {
+            string query = "UPDATE Books SET Rating = @Rating, Review = @Review WHERE Id = @Id";
+            SqlParameter[] parameters = {
+        new SqlParameter("@Rating", rating),
+        new SqlParameter("@Review", review),
+        new SqlParameter("@Id", bookId)
+    };
+
+            return DatabaseHelper.ExecuteNonQuery(query, parameters) > 0;
+        }
+
+        // 3. Update current tracking bookmark page
+        public bool UpdateReadingProgress(int bookId, int currentPage)
+        {
+            string query = "UPDATE Books SET CurrentPage = @CurrentPage WHERE Id = @Id";
+            SqlParameter[] parameters = {
+        new SqlParameter("@CurrentPage", currentPage),
+        new SqlParameter("@Id", bookId)
+    };
+
+            return DatabaseHelper.ExecuteNonQuery(query, parameters) > 0;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ReadLog
+﻿namespace ReadLog.Forms
 {
     partial class BookDetailForm
     {
@@ -55,9 +55,10 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(229, 21);
             label1.Name = "label1";
-            label1.Size = new Size(111, 25);
+            label1.Size = new Size(142, 30);
             label1.TabIndex = 0;
             label1.Text = "Book Details";
             // 

@@ -1,237 +1,121 @@
-﻿using ReadLog.Database;
+﻿using ReadLog.Controllers; // Hooks into controller layer structures
 using System;
-using System.Data.SqlClient;
+using System.Data;
 using System.Windows.Forms;
+using ReadLog.Database;    // Connects to our Database helper for direct queries if needed (try to keep this in controllers though!)
 
-namespace ReadLog
+namespace ReadLog.Forms
 {
     public partial class BookDetailForm : Form
     {
         private int bookId;
-        // Sample values
+
+        // Connect to our middleman architecture tier
+        private BookController _bookController = new BookController();
 
         public BookDetailForm(int id)
         {
             InitializeComponent();
-
             bookId = id;
 
             LoadRatings();
             LoadBookDetails();
         }
 
-
-        // LOAD BOOK DATA
+        // LOAD DATA VIA LAYER MIDDLEMAN
         private void LoadBookDetails()
         {
-            using (SqlConnection conn =
-                new SqlConnection(DatabaseHelper.connectionString))
+            try
             {
-                conn.Open();
+                DataRow row = _bookController.GetBookDetails(bookId);
 
-                string query =
-                    "SELECT * FROM Books WHERE Id=@Id";
-
-                SqlCommand cmd =
-                    new SqlCommand(query, conn);
-
-                cmd.Parameters.AddWithValue("@Id", bookId);
-
-                SqlDataReader reader =
-                    cmd.ExecuteReader();
-
-                if (reader.Read())
+                if (row != null)
                 {
-                    lblTitle.Text =
-                        reader["Title"].ToString();
+                    lblTitle.Text = row["Title"].ToString();
+                    lblAuthor.Text = row["Author"].ToString();
+                    lblGenre.Text = row["Genre"].ToString();
+                    lblStatus.Text = row["ReadingStatus"].ToString();
+                    lblPages.Text = row["TotalPages"].ToString();
 
-                    lblAuthor.Text =
-                        reader["Author"].ToString();
-
-                    lblGenre.Text =
-                        reader["Genre"].ToString();
-
-                    lblStatus.Text =
-                        reader["ReadingStatus"].ToString();
-
-                    lblPages.Text =
-                        reader["TotalPages"].ToString();
-
-                    // Current page
-                    int currentPage = 0;
-
-                    if (reader["CurrentPage"] != DBNull.Value)
-                    {
-                        currentPage =
-                            Convert.ToInt32(
-                                reader["CurrentPage"]
-                            );
-                    }
-
+                    int currentPage = row["CurrentPage"] != DBNull.Value ? Convert.ToInt32(row["CurrentPage"]) : 0;
                     numCurrentPage.Value = currentPage;
 
-                    // Total pages
-                    int totalPages =
-                        Convert.ToInt32(
-                            reader["TotalPages"]
-                        );
+                    int totalPages = Convert.ToInt32(row["TotalPages"]);
 
-                    // Progress %
-                    int progress = 0;
-
-                    if (totalPages > 0)
-                    {
-                        progress =
-                            (currentPage * 100) / totalPages;
-                    }
-
-                    if (progress > 100)
-                    {
-                        progress = 100;
-                    }
-
+                    // Compute Progress metrics locally inside view presentation tier
+                    int progress = totalPages > 0 ? (currentPage * 100) / totalPages : 0;
+                    if (progress > 100) progress = 100;
                     progressReading.Value = progress;
 
-                    // Rating
-                    if (reader["Rating"] != DBNull.Value)
+                    if (row["Rating"] != DBNull.Value)
                     {
-                        cmbRating.SelectedItem =
-                            reader["Rating"].ToString() + " Stars";
+                        cmbRating.SelectedItem = row["Rating"].ToString() + " Stars";
                     }
 
-                    // Review
-                    if (reader["Review"] != DBNull.Value)
+                    if (row["Review"] != DBNull.Value)
                     {
-                        txtReview.Text =
-                            reader["Review"].ToString();
+                        txtReview.Text = row["Review"].ToString();
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed loading book context summary profile: {ex.Message}", "System Query Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        // LOAD RATING OPTIONS
+
         private void LoadRatings()
         {
             cmbRating.Items.Clear();
+            // Reusing core AppData constants collection array structure
             cmbRating.Items.AddRange(AppData.Ratings);
         }
 
-
-        // SAVE REVIEW BUTTON
-        private void btnSaveReview_Click(
-     object sender,
-     EventArgs e)
+        // CONTROL PERSISTENCE WITH EXPLICIT ARCHITECTURE ACTIONS
+        private void btnSaveReview_Click(object sender, EventArgs e)
         {
-            // Get rating number
-            int rating = 0;
+            int rating = cmbRating.SelectedIndex >= 0 ? cmbRating.SelectedIndex + 1 : 0;
+            string review = txtReview.Text;
 
-            if (cmbRating.SelectedIndex >= 0)
+            try
             {
-                rating =
-                    cmbRating.SelectedIndex + 1;
+                bool success = _bookController.UpdateBookReview(bookId, rating, review);
+                if (success)
+                {
+                    MessageBox.Show("Review saved successfully!", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-
-            string review =
-                txtReview.Text;
-
-            using (SqlConnection conn =
-                new SqlConnection(
-                    DatabaseHelper.connectionString))
+            catch (Exception ex)
             {
-                conn.Open();
-
-                string query =
-                    @"UPDATE Books
-              SET
-                Rating=@Rating,
-                Review=@Review
-              WHERE Id=@Id";
-
-                SqlCommand cmd =
-                    new SqlCommand(query, conn);
-
-                cmd.Parameters.AddWithValue(
-                    "@Rating",
-                    rating
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@Review",
-                    review
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@Id",
-                    bookId
-                );
-
-                cmd.ExecuteNonQuery();
+                MessageBox.Show($"Failed tracking user commentary modifications: {ex.Message}", "Save Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            MessageBox.Show(
-                "Review saved successfully!"
-            );
         }
 
-       
-        private void btnUpdateProgress_Click(
-    object sender,
-    EventArgs e)
+        private void btnUpdateProgress_Click(object sender, EventArgs e)
         {
-            int currentPage =
-                (int)numCurrentPage.Value;
+            int currentPage = (int)numCurrentPage.Value;
+            int totalPages = Convert.ToInt32(lblPages.Text);
 
-            int totalPages =
-                Convert.ToInt32(lblPages.Text);
-
-            using (SqlConnection conn =
-                new SqlConnection(
-                    DatabaseHelper.connectionString))
+            try
             {
-                conn.Open();
+                bool success = _bookController.UpdateReadingProgress(bookId, currentPage);
 
-                string query =
-                    @"UPDATE Books
-              SET CurrentPage=@CurrentPage
-              WHERE Id=@Id";
+                if (success)
+                {
+                    int percent = totalPages > 0 ? (currentPage * 100) / totalPages : 0;
+                    if (percent > 100) percent = 100;
+                    progressReading.Value = percent;
 
-                SqlCommand cmd =
-                    new SqlCommand(query, conn);
+                    MessageBox.Show("Progress updated!", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                cmd.Parameters.AddWithValue(
-                    "@CurrentPage",
-                    currentPage
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@Id",
-                    bookId
-                );
-
-                cmd.ExecuteNonQuery();
+                    // Synchronize and render visual controls data status fresh
+                    LoadBookDetails();
+                }
             }
-
-            // UPDATE BAR
-            int percent = 0;
-
-            if (totalPages > 0)
+            catch (Exception ex)
             {
-                percent =
-                    (currentPage * 100) / totalPages;
+                MessageBox.Show($"Could not manipulate metric database states: {ex.Message}", "Processing Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            if (percent > 100)
-            {
-                percent = 100;
-            }
-
-            progressReading.Value = percent;
-
-            MessageBox.Show(
-                "Progress updated!"
-            );
-
-            // Reload form data
-            LoadBookDetails();
         }
     }
 }

@@ -3,12 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\ReadLog\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\forms\\libraryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:forms\\libraryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\database\\appdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:database\\appdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\forms\\libraryform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:forms\\libraryform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\forms\\libraryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:forms\\libraryform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\forms\\dashboardform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:forms\\dashboardform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\controllers\\goalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:controllers\\goalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B7F0A003-1D5C-F234-8FBC-9F7D751258DA}|ReadLog.csproj|c:\\users\\user\\source\\repos\\readlog\\forms\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,24 +62,126 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "AppData.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Database\\AppData.cs",
+              "RelativeDocumentMoniker": "Database\\AppData.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Database\\AppData.cs",
+              "RelativeToolTip": "Database\\AppData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T10:48:17.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LibraryForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LibraryForm.Designer.cs",
+              "RelativeDocumentMoniker": "Forms\\LibraryForm.Designer.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LibraryForm.Designer.cs",
+              "RelativeToolTip": "Forms\\LibraryForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T10:45:40.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LibraryForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LibraryForm.cs",
+              "RelativeDocumentMoniker": "Forms\\LibraryForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LibraryForm.cs [Design]",
+              "RelativeToolTip": "Forms\\LibraryForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T10:42:31.168Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LibraryForm.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LibraryForm.cs",
+              "RelativeDocumentMoniker": "Forms\\LibraryForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LibraryForm.cs",
+              "RelativeToolTip": "Forms\\LibraryForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAACEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T10:42:26.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DashboardForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\DashboardForm.Designer.cs",
+              "RelativeDocumentMoniker": "Forms\\DashboardForm.Designer.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\DashboardForm.Designer.cs",
+              "RelativeToolTip": "Forms\\DashboardForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T10:37:14.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BookController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Controllers\\BookController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BookController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Controllers\\BookController.cs",
+              "RelativeToolTip": "Controllers\\BookController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAswGUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T10:35:20.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GoalController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Controllers\\GoalController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GoalController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Controllers\\GoalController.cs",
+              "RelativeToolTip": "Controllers\\GoalController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAA1wEMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T10:36:29.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DashboardForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\DashboardForm.cs",
+              "RelativeDocumentMoniker": "Forms\\DashboardForm.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\DashboardForm.cs [Design]",
+              "RelativeToolTip": "Forms\\DashboardForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T10:33:27.791Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "DashboardForm.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\DashboardForm.cs",
               "RelativeDocumentMoniker": "Forms\\DashboardForm.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\DashboardForm.cs",
               "RelativeToolTip": "Forms\\DashboardForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-22T10:30:19.356Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -60,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
               "Title": "LoginForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LoginForm.Designer.cs",
               "RelativeDocumentMoniker": "Forms\\LoginForm.Designer.cs",
@@ -73,7 +207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "LoginForm.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LoginForm.cs",
               "RelativeDocumentMoniker": "Forms\\LoginForm.cs",
@@ -86,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "LoginForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ReadLog\\Forms\\LoginForm.cs",
               "RelativeDocumentMoniker": "Forms\\LoginForm.cs",
