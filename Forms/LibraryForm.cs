@@ -60,7 +60,7 @@ namespace ReadLog.Forms
                 foreach (DataRow row in dt.Rows)
                 {
                     dgvBooks.Rows.Add(
-                        row["Id"],
+                        row["BookID"],
                         row["Title"],
                         row["Author"],
                         row["Genre"],
