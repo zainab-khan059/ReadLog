@@ -110,15 +110,9 @@ namespace ReadLog
         // LOAD RATING OPTIONS
         private void LoadRatings()
         {
-            cmbRating.Items.Add("1 Star");
-            cmbRating.Items.Add("2 Stars");
-            cmbRating.Items.Add("3 Stars");
-            cmbRating.Items.Add("4 Stars");
-            cmbRating.Items.Add("5 Stars");
-
-            cmbRating.SelectedIndex = 4;
+            cmbRating.Items.Clear();
+            cmbRating.Items.AddRange(AppData.Ratings);
         }
-
 
 
         // SAVE REVIEW BUTTON
@@ -177,28 +171,7 @@ namespace ReadLog
             );
         }
 
-        // DELETE BOOK BUTTON
-        private void btnDelete_Click(
-            object sender,
-            EventArgs e)
-        {
-            DialogResult result =
-                MessageBox.Show(
-                    "Are you sure you want to delete this book?",
-                    "Delete Confirmation",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                );
-
-            if (result == DialogResult.Yes)
-            {
-                MessageBox.Show(
-                    "Book deleted successfully!"
-                );
-
-                this.Close();
-            }
-        }
+       
         private void btnUpdateProgress_Click(
     object sender,
     EventArgs e)

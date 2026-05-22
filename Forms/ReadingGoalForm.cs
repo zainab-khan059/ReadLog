@@ -12,7 +12,6 @@ namespace ReadLog
             InitializeComponent();
 
             LoadGoalHistory();
-            UpdateProgress();
         }
         public ReadingGoalForm(Form dash)
         {
@@ -40,33 +39,7 @@ namespace ReadLog
             );
         }
 
-        // UPDATE PROGRESS BAR
-        private void UpdateProgress()
-        {
-            int goal = (int)numGoal.Value;
-            int completed = (int)numCompleted.Value;
 
-            if (goal == 0)
-            {
-                progressGoal.Value = 0;
-                lblPercent.Text = "0% Complete";
-                return;
-            }
-
-            int percent =
-                (completed * 100) / goal;
-
-            // Prevent overflow
-            if (percent > 100)
-            {
-                percent = 100;
-            }
-
-            progressGoal.Value = percent;
-
-            lblPercent.Text =
-                percent.ToString() + "% Complete";
-        }
 
         // SAVE GOAL BUTTON
         private void btnSaveGoal_Click(
@@ -157,24 +130,34 @@ namespace ReadLog
             );
         }
 
-        // AUTO UPDATE PROGRESS
-        private void numGoal_ValueChanged(
-            object sender,
-            EventArgs e)
-        {
-            UpdateProgress();
-        }
 
-        private void numCompleted_ValueChanged(
-            object sender,
-            EventArgs e)
-        {
-            UpdateProgress();
-        }
 
         private void ReadingGoalForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             dashboard.Show();
+        }
+
+        private void btnClearGoals_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to clear all goals? This action cannot be undone.",
+                "Confirm Clear",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                using (SqlConnection conn = new SqlConnection(DatabaseHelper.connectionString))
+                {
+                    conn.Open();
+                    string deleteQuery = "DELETE FROM ReadingGoals";
+                    SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("All goals have been cleared.");
+            }
         }
     }
 }

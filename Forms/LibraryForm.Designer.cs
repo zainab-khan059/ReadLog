@@ -117,7 +117,6 @@
             // 
             cmbRating.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbRating.FormattingEnabled = true;
-            cmbRating.Items.AddRange(new object[] { "1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars" });
             cmbRating.Location = new Point(163, 91);
             cmbRating.Name = "cmbRating";
             cmbRating.Size = new Size(165, 33);
@@ -127,7 +126,6 @@
             // 
             cmbStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbStatus.FormattingEnabled = true;
-            cmbStatus.Items.AddRange(new object[] { "Read", "Currently Reading", "Want to Read" });
             cmbStatus.Location = new Point(163, 52);
             cmbStatus.Name = "cmbStatus";
             cmbStatus.Size = new Size(165, 33);
@@ -137,7 +135,6 @@
             // 
             cmbGenre.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbGenre.FormattingEnabled = true;
-            cmbGenre.Items.AddRange(new object[] { "Sci-Fi", "Fantasy", "Self Help", "Programming", "Education", "History" });
             cmbGenre.Location = new Point(163, 14);
             cmbGenre.Name = "cmbGenre";
             cmbGenre.Size = new Size(165, 33);

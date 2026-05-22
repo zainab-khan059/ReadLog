@@ -5,50 +5,58 @@ using System.Windows.Forms;
 namespace ReadLog
 {
     public partial class LibraryForm : Form
-
     {
         private Form dashboard;
         private int selectedBookId = -1;
+
         public LibraryForm(Form dashboard)
         {
             InitializeComponent();
 
+            this.dashboard = dashboard;
+
             LoadFilters();
             LoadBooks();
-            this.dashboard = dashboard;
         }
 
         // LOAD FILTER OPTIONS
         private void LoadFilters()
         {
-            // Genre Filter
+            // Clear old items first
+            cmbGenre.Items.Clear();
+            cmbStatus.Items.Clear();
+            cmbRating.Items.Clear();
+
+            // =========================
+            // GENRE FILTER
+            // =========================
+
+            cmbGenre.Items.Clear();
             cmbGenre.Items.Add("All");
-            cmbGenre.Items.Add("Sci-Fi");
-            cmbGenre.Items.Add("Fantasy");
-            cmbGenre.Items.Add("Self Help");
-            cmbGenre.Items.Add("Programming");
-            cmbGenre.Items.Add("Education");
-            cmbGenre.Items.Add("History");
+            cmbGenre.Items.AddRange(AppData.Genres);
             cmbGenre.SelectedIndex = 0;
 
-            // Status Filter
-            cmbStatus.Items.Add("All");
-            cmbStatus.Items.Add("Read");
-            cmbStatus.Items.Add("Currently Reading");
-            cmbStatus.Items.Add("Want To Read");
-            cmbStatus.SelectedIndex = 0;
 
-            // Rating Filter
+            // =========================
+            // STATUS FILTER
+            // =========================
+            cmbStatus.Items.Clear();
+            cmbStatus.Items.AddRange(AppData.Status);
+
+            // =========================
+            // RATING FILTER
+            // =========================
             cmbRating.Items.Add("All");
             cmbRating.Items.Add("1 Star");
             cmbRating.Items.Add("2 Stars");
             cmbRating.Items.Add("3 Stars");
             cmbRating.Items.Add("4 Stars");
             cmbRating.Items.Add("5 Stars");
+
             cmbRating.SelectedIndex = 0;
         }
 
-        // LOAD SAMPLE BOOKS
+        // LOAD BOOKS FROM DATABASE
         private void LoadBooks()
         {
             dgvBooks.Rows.Clear();
@@ -77,8 +85,12 @@ namespace ReadLog
                         reader["Rating"]
                     );
                 }
+
+                reader.Close();
             }
         }
+
+              // LOAD SAMPLE BOOKS
 
         // SEARCH BOOKS
         private void txtSearch_TextChanged(object sender, EventArgs e)

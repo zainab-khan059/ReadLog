@@ -49,7 +49,6 @@
             label10 = new Label();
             txtReview = new TextBox();
             btnSaveReview = new Button();
-            btnDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)numCurrentPage).BeginInit();
             SuspendLayout();
             // 
@@ -171,7 +170,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(167, 368);
+            label8.Location = new Point(167, 399);
             label8.Name = "label8";
             label8.Size = new Size(113, 25);
             label8.TabIndex = 13;
@@ -179,7 +178,7 @@
             // 
             // numCurrentPage
             // 
-            numCurrentPage.Location = new Point(304, 366);
+            numCurrentPage.Location = new Point(304, 397);
             numCurrentPage.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
             numCurrentPage.Name = "numCurrentPage";
             numCurrentPage.Size = new Size(180, 31);
@@ -187,7 +186,7 @@
             // 
             // btnUpdateProgress
             // 
-            btnUpdateProgress.Location = new Point(502, 360);
+            btnUpdateProgress.Location = new Point(520, 391);
             btnUpdateProgress.Name = "btnUpdateProgress";
             btnUpdateProgress.Size = new Size(166, 40);
             btnUpdateProgress.TabIndex = 15;
@@ -198,7 +197,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(217, 411);
+            label9.Location = new Point(217, 453);
             label9.Name = "label9";
             label9.Size = new Size(63, 25);
             label9.TabIndex = 16;
@@ -209,7 +208,7 @@
             cmbRating.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbRating.FormattingEnabled = true;
             cmbRating.Items.AddRange(new object[] { "1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars" });
-            cmbRating.Location = new Point(304, 411);
+            cmbRating.Location = new Point(304, 450);
             cmbRating.Name = "cmbRating";
             cmbRating.Size = new Size(182, 33);
             cmbRating.TabIndex = 17;
@@ -217,7 +216,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(167, 484);
+            label10.Location = new Point(151, 540);
             label10.Name = "label10";
             label10.Size = new Size(134, 25);
             label10.TabIndex = 18;
@@ -225,7 +224,7 @@
             // 
             // txtReview
             // 
-            txtReview.Location = new Point(168, 512);
+            txtReview.Location = new Point(151, 568);
             txtReview.Multiline = true;
             txtReview.Name = "txtReview";
             txtReview.ScrollBars = ScrollBars.Vertical;
@@ -234,7 +233,7 @@
             // 
             // btnSaveReview
             // 
-            btnSaveReview.Location = new Point(502, 468);
+            btnSaveReview.Location = new Point(502, 524);
             btnSaveReview.Name = "btnSaveReview";
             btnSaveReview.Size = new Size(166, 38);
             btnSaveReview.TabIndex = 20;
@@ -242,22 +241,11 @@
             btnSaveReview.UseVisualStyleBackColor = true;
             btnSaveReview.Click += btnSaveReview_Click;
             // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(328, 678);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(174, 40);
-            btnDelete.TabIndex = 21;
-            btnDelete.Text = "Delete Book";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
-            // 
             // BookDetailForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(781, 783);
-            Controls.Add(btnDelete);
             Controls.Add(btnSaveReview);
             Controls.Add(txtReview);
             Controls.Add(label10);

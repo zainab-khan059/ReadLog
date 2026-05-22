@@ -15,6 +15,7 @@ namespace ReadLog
 
             LoadGenres();
             LoadStatuses();
+           
         }
         public AddEditBookForm(int id)
         {
@@ -36,26 +37,18 @@ namespace ReadLog
         // LOAD GENRE OPTIONS
         private void LoadGenres()
         {
-            cmbGenre.Items.Add("Sci-Fi");
-            cmbGenre.Items.Add("Fantasy");
-            cmbGenre.Items.Add("Self Help");
-            cmbGenre.Items.Add("Programming");
-            cmbGenre.Items.Add("Education");
-            cmbGenre.Items.Add("History");
-
-            cmbGenre.SelectedIndex = 0;
+            cmbGenre.Items.Clear();
+            cmbGenre.Items.AddRange(AppData.Genres);
         }
 
         // LOAD STATUS OPTIONS
         private void LoadStatuses()
         {
-            cmbStatus.Items.Add("Currently Reading");
-            cmbStatus.Items.Add("Read");
-            cmbStatus.Items.Add("Want To Read");
-
-            cmbStatus.SelectedIndex = 0;
+            cmbStatus.Items.Clear();
+            cmbStatus.Items.AddRange(AppData.Status);
         }
 
+       
         // SAVE BUTTON
         private void btnSave_Click(
     object sender,
@@ -240,7 +233,18 @@ namespace ReadLog
 
         private void AddEditBookForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            dashboard.Show();
+            if (dashboard != null)
+                dashboard.Show();
+        }
+
+        private void AddEditBookForm_Load(object sender, EventArgs e)
+        {
+            cmbGenre.Items.Clear();
+            cmbGenre.Items.AddRange(AppData.Genres);
+
+            cmbStatus.Items.Clear();
+            cmbStatus.Items.AddRange(AppData.Status);
         }
     }
+    
 }

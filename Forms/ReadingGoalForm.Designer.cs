@@ -33,15 +33,13 @@
             numGoal = new NumericUpDown();
             label3 = new Label();
             numCompleted = new NumericUpDown();
-            label4 = new Label();
-            progressGoal = new ProgressBar();
-            lblPercent = new Label();
             btnSaveGoal = new Button();
             dgvHistory = new DataGridView();
             colYear = new DataGridViewTextBoxColumn();
             colGoal = new DataGridViewTextBoxColumn();
             colCompleted = new DataGridViewTextBoxColumn();
             colResult = new DataGridViewTextBoxColumn();
+            btnClearGoals = new Button();
             ((System.ComponentModel.ISupportInitialize)numGoal).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numCompleted).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvHistory).BeginInit();
@@ -60,7 +58,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(149, 80);
+            label2.Location = new Point(159, 99);
             label2.Name = "label2";
             label2.Size = new Size(114, 25);
             label2.TabIndex = 1;
@@ -68,7 +66,7 @@
             // 
             // numGoal
             // 
-            numGoal.Location = new Point(320, 78);
+            numGoal.Location = new Point(320, 97);
             numGoal.Name = "numGoal";
             numGoal.Size = new Size(180, 31);
             numGoal.TabIndex = 2;
@@ -76,7 +74,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(109, 130);
+            label3.Location = new Point(119, 168);
             label3.Name = "label3";
             label3.Size = new Size(154, 25);
             label3.TabIndex = 3;
@@ -84,39 +82,14 @@
             // 
             // numCompleted
             // 
-            numCompleted.Location = new Point(320, 124);
+            numCompleted.Location = new Point(320, 166);
             numCompleted.Name = "numCompleted";
             numCompleted.Size = new Size(180, 31);
             numCompleted.TabIndex = 4;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(182, 180);
-            label4.Name = "label4";
-            label4.Size = new Size(81, 25);
-            label4.TabIndex = 5;
-            label4.Text = "Progress";
-            // 
-            // progressGoal
-            // 
-            progressGoal.Location = new Point(317, 180);
-            progressGoal.Name = "progressGoal";
-            progressGoal.Size = new Size(180, 32);
-            progressGoal.TabIndex = 6;
-            // 
-            // lblPercent
-            // 
-            lblPercent.AutoSize = true;
-            lblPercent.Location = new Point(529, 180);
-            lblPercent.Name = "lblPercent";
-            lblPercent.Size = new Size(119, 25);
-            lblPercent.TabIndex = 7;
-            lblPercent.Text = "0% Complete";
-            // 
             // btnSaveGoal
             // 
-            btnSaveGoal.Location = new Point(273, 250);
+            btnSaveGoal.Location = new Point(159, 238);
             btnSaveGoal.Name = "btnSaveGoal";
             btnSaveGoal.Size = new Size(172, 41);
             btnSaveGoal.TabIndex = 8;
@@ -166,16 +139,24 @@
             colResult.Name = "colResult";
             colResult.ReadOnly = true;
             // 
+            // btnClearGoals
+            // 
+            btnClearGoals.Location = new Point(383, 240);
+            btnClearGoals.Name = "btnClearGoals";
+            btnClearGoals.Size = new Size(176, 39);
+            btnClearGoals.TabIndex = 10;
+            btnClearGoals.Text = "Clear Goals";
+            btnClearGoals.UseVisualStyleBackColor = true;
+            btnClearGoals.Click += btnClearGoals_Click;
+            // 
             // ReadingGoalForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 644);
+            Controls.Add(btnClearGoals);
             Controls.Add(dgvHistory);
             Controls.Add(btnSaveGoal);
-            Controls.Add(lblPercent);
-            Controls.Add(progressGoal);
-            Controls.Add(label4);
             Controls.Add(numCompleted);
             Controls.Add(label3);
             Controls.Add(numGoal);
@@ -199,14 +180,12 @@
         private NumericUpDown numGoal;
         private Label label3;
         private NumericUpDown numCompleted;
-        private Label label4;
-        private ProgressBar progressGoal;
-        private Label lblPercent;
         private Button btnSaveGoal;
         private DataGridView dgvHistory;
         private DataGridViewTextBoxColumn colYear;
         private DataGridViewTextBoxColumn colGoal;
         private DataGridViewTextBoxColumn colCompleted;
         private DataGridViewTextBoxColumn colResult;
+        private Button btnClearGoals;
     }
 }

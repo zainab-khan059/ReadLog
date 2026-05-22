@@ -172,7 +172,6 @@
             // 
             cmbGenre.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbGenre.FormattingEnabled = true;
-            cmbGenre.Items.AddRange(new object[] { "Sci-Fi", "Fantasy", "Self-Help", "Programming", "Education", "History" });
             cmbGenre.Location = new Point(277, 179);
             cmbGenre.Name = "cmbGenre";
             cmbGenre.Size = new Size(205, 33);
@@ -257,6 +256,7 @@
             Name = "AddEditBookForm";
             StartPosition = FormStartPosition.CenterScreen;
             FormClosed += AddEditBookForm_FormClosed;
+            Load += AddEditBookForm_Load;
             ((System.ComponentModel.ISupportInitialize)numYear).EndInit();
             ((System.ComponentModel.ISupportInitialize)numPages).EndInit();
             ResumeLayout(false);
