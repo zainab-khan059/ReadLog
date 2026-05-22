@@ -134,5 +134,42 @@ namespace ReadLog.Controllers
 
             return DatabaseHelper.ExecuteNonQuery(query, parameters) > 0;
         }
+        // 1. Add a brand new book record to the database
+        public bool AddBook(string title, string author, string genre, int publicationYear, string readingStatus, int totalPages)
+        {
+            string query = @"INSERT INTO Books (Title, Author, Genre, PublicationYear, ReadingStatus, TotalPages) 
+                    VALUES (@Title, @Author, @Genre, @PublicationYear, @ReadingStatus, @TotalPages)";
+
+            System.Data.SqlClient.SqlParameter[] parameters = {
+        new System.Data.SqlClient.SqlParameter("@Title", title),
+        new System.Data.SqlClient.SqlParameter("@Author", author),
+        new System.Data.SqlClient.SqlParameter("@Genre", genre),
+        new System.Data.SqlClient.SqlParameter("@PublicationYear", publicationYear),
+        new System.Data.SqlClient.SqlParameter("@ReadingStatus", readingStatus),
+        new System.Data.SqlClient.SqlParameter("@TotalPages", totalPages)
+    };
+
+            return ReadLog.Database.DatabaseHelper.ExecuteNonQuery(query, parameters) > 0;
+        }
+
+        // 2. Update an existing book record by its Id
+        public bool UpdateBook(int id, string title, string author, string genre, int publicationYear, string readingStatus, int totalPages)
+        {
+            string query = @"UPDATE Books 
+                    SET Title=@Title, Author=@Author, Genre=@Genre, PublicationYear=@PublicationYear, ReadingStatus=@ReadingStatus, TotalPages=@TotalPages 
+                    WHERE Id=@Id";
+
+            System.Data.SqlClient.SqlParameter[] parameters = {
+        new System.Data.SqlClient.SqlParameter("@Id", id),
+        new System.Data.SqlClient.SqlParameter("@Title", title),
+        new System.Data.SqlClient.SqlParameter("@Author", author),
+        new System.Data.SqlClient.SqlParameter("@Genre", genre),
+        new System.Data.SqlClient.SqlParameter("@PublicationYear", publicationYear),
+        new System.Data.SqlClient.SqlParameter("@ReadingStatus", readingStatus),
+        new System.Data.SqlClient.SqlParameter("@TotalPages", totalPages)
+    };
+
+            return ReadLog.Database.DatabaseHelper.ExecuteNonQuery(query, parameters) > 0;
+        }
     }
 }

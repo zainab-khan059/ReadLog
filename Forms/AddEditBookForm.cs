@@ -1,234 +1,133 @@
-﻿using ReadLog.Database;
+﻿using ReadLog.Controllers; // Connects to our middleman controllers
 using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using ReadLog.Database;    // Connects to our Database helper for direct queries if needed (try to keep this in controllers though!)
 
-namespace ReadLog
+namespace ReadLog.Forms
 {
     public partial class AddEditBookForm : Form
     {
         private int bookId = -1;
         private bool isEditMode = false;
         private Form dashboard;
+
+        // Connect to our middleman architecture tier
+        private BookController _bookController = new BookController();
+
         public AddEditBookForm()
         {
             InitializeComponent();
-
-            LoadGenres();
-            LoadStatuses();
-           
+            InitializeDropdownOptions();
         }
+
         public AddEditBookForm(int id)
         {
             InitializeComponent();
-
-            LoadGenres();
-            LoadStatuses();
+            InitializeDropdownOptions();
 
             bookId = id;
             isEditMode = true;
 
             LoadBookData();
         }
+
         public AddEditBookForm(Form dash)
         {
             InitializeComponent();
+            InitializeDropdownOptions();
             dashboard = dash;
         }
-        // LOAD GENRE OPTIONS
-        private void LoadGenres()
+
+        // Keep dropdown setup bundled cleanly together
+        private void InitializeDropdownOptions()
         {
             cmbGenre.Items.Clear();
             cmbGenre.Items.AddRange(AppData.Genres);
-        }
 
-        // LOAD STATUS OPTIONS
-        private void LoadStatuses()
-        {
             cmbStatus.Items.Clear();
             cmbStatus.Items.AddRange(AppData.Status);
         }
 
-       
-        // SAVE BUTTON
-        private void btnSave_Click(
-    object sender,
-    EventArgs e)
+        // LOAD DATA VIA LAYER MIDDLEMAN
+        private void LoadBookData()
         {
-            lblError.Text = "";
-
-            if (txtTitle.Text.Trim() == "")
+            try
             {
-                lblError.Text = "Title is required.";
+                DataRow row = _bookController.GetBookDetails(bookId);
+
+                if (row != null)
+                {
+                    txtTitle.Text = row["Title"].ToString();
+                    txtAuthor.Text = row["Author"].ToString();
+                    cmbGenre.Text = row["Genre"].ToString();
+                    numYear.Value = Convert.ToDecimal(row["PublicationYear"]);
+                    cmbStatus.Text = row["ReadingStatus"].ToString();
+                    numPages.Value = Convert.ToDecimal(row["TotalPages"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed loading book records: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // SAVE LOGIC HANDLED EXCLUSIVELY VIA CONTROLLER
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            // Reset error if you have an lblError indicator
+            if (lblError != null) lblError.Text = "";
+
+            string title = txtTitle.Text.Trim();
+            string author = txtAuthor.Text.Trim();
+
+            if (string.IsNullOrEmpty(title))
+            {
+                if (lblError != null) lblError.Text = "Title is required.";
+                else MessageBox.Show("Title is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (txtAuthor.Text.Trim() == "")
+            if (string.IsNullOrEmpty(author))
             {
-                lblError.Text = "Author is required.";
+                if (lblError != null) lblError.Text = "Author is required.";
+                else MessageBox.Show("Author is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (SqlConnection conn =
-                new SqlConnection(
-                    DatabaseHelper.connectionString))
+            try
             {
-                conn.Open();
+                bool success;
 
-                SqlCommand cmd;
-
-                // EDIT MODE
                 if (isEditMode)
                 {
-                    string query =
-                        @"UPDATE Books
-                SET
-                    Title=@Title,
-                    Author=@Author,
-                    Genre=@Genre,
-                    PublicationYear=@PublicationYear,
-                    ReadingStatus=@ReadingStatus,
-                    TotalPages=@TotalPages
-                WHERE Id=@Id";
-
-                    cmd =
-                        new SqlCommand(query, conn);
-
-                    cmd.Parameters.AddWithValue(
-                        "@Id",
-                        bookId
-                    );
+                    success = _bookController.UpdateBook(bookId, title, author, cmbGenre.Text, (int)numYear.Value, cmbStatus.Text, (int)numPages.Value);
                 }
                 else
                 {
-                    // ADD MODE
-                    string query =
-                        @"INSERT INTO Books
-                (
-                    Title,
-                    Author,
-                    Genre,
-                    PublicationYear,
-                    ReadingStatus,
-                    TotalPages
-                )
-                VALUES
-                (
-                    @Title,
-                    @Author,
-                    @Genre,
-                    @PublicationYear,
-                    @ReadingStatus,
-                    @TotalPages
-                )";
-
-                    cmd =
-                        new SqlCommand(query, conn);
+                    success = _bookController.AddBook(title, author, cmbGenre.Text, (int)numYear.Value, cmbStatus.Text, (int)numPages.Value);
                 }
 
-                cmd.Parameters.AddWithValue(
-                    "@Title",
-                    txtTitle.Text
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@Author",
-                    txtAuthor.Text
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@Genre",
-                    cmbGenre.Text
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@PublicationYear",
-                    numYear.Value
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@ReadingStatus",
-                    cmbStatus.Text
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@TotalPages",
-                    numPages.Value
-                );
-
-                cmd.ExecuteNonQuery();
+                if (success)
+                {
+                    MessageBox.Show("Book saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
             }
-
-            MessageBox.Show(
-                "Book saved successfully!"
-            );
-
-            this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Could not process save option: {ex.Message}", "Processing Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        // CANCEL BUTTON
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
-            DialogResult result =
-                MessageBox.Show(
-                    "Discard changes?",
-                    "Cancel",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
+            DialogResult result = MessageBox.Show("Discard changes?", "Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
                 this.Close();
-            }
-        }
-        private void LoadBookData()
-        {
-            using (SqlConnection conn =
-                new SqlConnection(
-                    DatabaseHelper.connectionString))
-            {
-                conn.Open();
-
-                string query =
-                    "SELECT * FROM Books WHERE Id=@Id";
-
-                SqlCommand cmd =
-                    new SqlCommand(query, conn);
-
-                cmd.Parameters.AddWithValue(
-                    "@Id",
-                    bookId
-                );
-
-                SqlDataReader reader =
-                    cmd.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    txtTitle.Text =
-                        reader["Title"].ToString();
-
-                    txtAuthor.Text =
-                        reader["Author"].ToString();
-
-                    cmbGenre.Text =
-                        reader["Genre"].ToString();
-
-                    numYear.Value =
-                        Convert.ToDecimal(
-                            reader["PublicationYear"]
-                        );
-
-                    cmbStatus.Text =
-                        reader["ReadingStatus"].ToString();
-
-                    numPages.Value =
-                        Convert.ToDecimal(
-                            reader["TotalPages"]
-                        );
-                }
             }
         }
 
@@ -238,14 +137,10 @@ namespace ReadLog
                 dashboard.Show();
         }
 
+        // Form_Load handles double verification safely
         private void AddEditBookForm_Load(object sender, EventArgs e)
         {
-            cmbGenre.Items.Clear();
-            cmbGenre.Items.AddRange(AppData.Genres);
-
-            cmbStatus.Items.Clear();
-            cmbStatus.Items.AddRange(AppData.Status);
+            InitializeDropdownOptions();
         }
     }
-    
 }
