@@ -69,7 +69,7 @@ namespace ReadLog.Forms
         // --- NAVIGATION BUTTONS ---
         private void btnLibrary_Click(object sender, EventArgs e)
         {
-            LibraryForm libForm = new LibraryForm(this);
+            LibraryForm libForm = new LibraryForm();
             this.Hide();
             libForm.Show();
         }

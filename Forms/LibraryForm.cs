@@ -1,119 +1,94 @@
-﻿using ReadLog.Database;
+﻿using ReadLog.Controllers; // Connects to our middleman controllers
 using System;
-using System.Data.SqlClient;
+using System.Data;
 using System.Windows.Forms;
+using ReadLog.Database;    // Connects to our Database helper for direct queries if needed (try to keep this in controllers though!)
 
-namespace ReadLog
+namespace ReadLog.Forms
 {
     public partial class LibraryForm : Form
     {
         private Form dashboard;
         private int selectedBookId = -1;
 
+        // 1. Link our middleman controller
+        private BookController _bookController = new BookController();
+
         public LibraryForm(Form dashboard)
         {
             InitializeComponent();
-
             this.dashboard = dashboard;
 
             LoadFilters();
             LoadBooks();
         }
 
-        // LOAD FILTER OPTIONS
+        // LOAD FILTER OPTIONS (Kept local since it's pure UI configuration)
         private void LoadFilters()
         {
-            // Clear old items first
             cmbGenre.Items.Clear();
             cmbStatus.Items.Clear();
             cmbRating.Items.Clear();
 
-            // =========================
-            // GENRE FILTER
-            // =========================
-
-            cmbGenre.Items.Clear();
             cmbGenre.Items.Add("All");
+            // Assuming AppData class was moved or accessible. If it causes an error, make sure AppData namespace matches!
             cmbGenre.Items.AddRange(AppData.Genres);
             cmbGenre.SelectedIndex = 0;
 
-
-            // =========================
-            // STATUS FILTER
-            // =========================
             cmbStatus.Items.Clear();
             cmbStatus.Items.AddRange(AppData.Status);
 
-            // =========================
-            // RATING FILTER
-            // =========================
             cmbRating.Items.Add("All");
             cmbRating.Items.Add("1 Star");
             cmbRating.Items.Add("2 Stars");
             cmbRating.Items.Add("3 Stars");
             cmbRating.Items.Add("4 Stars");
             cmbRating.Items.Add("5 Stars");
-
             cmbRating.SelectedIndex = 0;
         }
 
-        // LOAD BOOKS FROM DATABASE
+        // 2. LOAD BOOKS FROM CONTROLLER
         private void LoadBooks()
         {
             dgvBooks.Rows.Clear();
 
-            using (SqlConnection conn =
-                new SqlConnection(DatabaseHelper.connectionString))
+            try
             {
-                conn.Open();
+                // Request data via controller layer
+                DataTable dt = _bookController.GetLibraryBooks();
 
-                string query = "SELECT * FROM Books";
-
-                SqlCommand cmd =
-                    new SqlCommand(query, conn);
-
-                SqlDataReader reader =
-                    cmd.ExecuteReader();
-
-                while (reader.Read())
+                foreach (DataRow row in dt.Rows)
                 {
                     dgvBooks.Rows.Add(
-                        reader["Id"],
-                        reader["Title"],
-                        reader["Author"],
-                        reader["Genre"],
-                        reader["ReadingStatus"],
-                        reader["Rating"]
+                        row["Id"],
+                        row["Title"],
+                        row["Author"],
+                        row["Genre"],
+                        row["ReadingStatus"],
+                        row["Rating"]
                     );
                 }
-
-                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load books: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-              // LOAD SAMPLE BOOKS
-
-        // SEARCH BOOKS
+        // SEARCH BOOKS (Pure UI search logic over already-loaded table rows)
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string search = txtSearch.Text.ToLower();
 
             foreach (DataGridViewRow row in dgvBooks.Rows)
             {
-                if (row.IsNewRow)
-                    continue;
+                if (row.IsNewRow) continue;
 
-                string title = row.Cells[0].Value.ToString().ToLower();
-                string author = row.Cells[1].Value.ToString().ToLower();
+                // Checking text contents safely across Title (cell 1) or Author (cell 2)
+                string title = row.Cells[1].Value?.ToString().ToLower() ?? "";
+                string author = row.Cells[2].Value?.ToString().ToLower() ?? "";
 
-                if (title.Contains(search) || author.Contains(search))
-                {
-                    row.Visible = true;
-                }
-                else
-                {
-                    row.Visible = false;
-                }
+                row.Visible = title.Contains(search) || author.Contains(search);
             }
         }
 
@@ -122,98 +97,61 @@ namespace ReadLog
         {
             if (e.RowIndex >= 0)
             {
-                int bookId = Convert.ToInt32(
-                    dgvBooks.Rows[e.RowIndex].Cells["colId"].Value);
-
+                int bookId = Convert.ToInt32(dgvBooks.Rows[e.RowIndex].Cells[0].Value);
                 BookDetailForm form = new BookDetailForm(bookId);
-
                 form.ShowDialog();
             }
         }
 
-        private void dgvBooks_CellClick(
-    object sender,
-    DataGridViewCellEventArgs e)
+        private void dgvBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                selectedBookId = Convert.ToInt32(
-                    dgvBooks.Rows[e.RowIndex]
-                    .Cells[0].Value
-                );
+                selectedBookId = Convert.ToInt32(dgvBooks.Rows[e.RowIndex].Cells[0].Value);
             }
         }
 
-        private void btnDelete_Click(
-    object sender,
-    EventArgs e)
+        // 3. DELETE VIA CONTROLLER
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             if (selectedBookId == -1)
             {
-                MessageBox.Show(
-                    "Please select a book first."
-                );
-
+                MessageBox.Show("Please select a book first.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            DialogResult result =
-                MessageBox.Show(
-                    "Delete this book permanently?",
-                    "Confirm Delete",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                );
+            DialogResult result = MessageBox.Show("Delete this book permanently?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                using (SqlConnection conn =
-                    new SqlConnection(
-                        DatabaseHelper.connectionString))
+                try
                 {
-                    conn.Open();
+                    bool success = _bookController.DeleteBook(selectedBookId);
 
-                    string query =
-                        "DELETE FROM Books WHERE Id=@Id";
-
-                    SqlCommand cmd =
-                        new SqlCommand(query, conn);
-
-                    cmd.Parameters.AddWithValue(
-                        "@Id",
-                        selectedBookId
-                    );
-
-                    cmd.ExecuteNonQuery();
+                    if (success)
+                    {
+                        MessageBox.Show("Book deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadBooks();
+                        selectedBookId = -1;
+                    }
                 }
-
-                MessageBox.Show(
-                    "Book deleted successfully!"
-                );
-
-                LoadBooks();
-
-                selectedBookId = -1;
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Could not delete book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-        private void btnEdit_Click(
-    object sender,
-    EventArgs e)
+
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             if (selectedBookId == -1)
             {
-                MessageBox.Show(
-                    "Please select a book first."
-                );
-
+                MessageBox.Show("Please select a book first.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            AddEditBookForm editForm =
-                new AddEditBookForm(selectedBookId);
-
+            AddEditBookForm editForm = new AddEditBookForm(selectedBookId);
             editForm.ShowDialog();
-
             LoadBooks();
         }
 
@@ -221,8 +159,5 @@ namespace ReadLog
         {
             dashboard.Show();
         }
-
-
     }
-    
 }

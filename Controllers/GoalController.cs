@@ -53,5 +53,18 @@ namespace ReadLog.Controllers
             int rowsAffected = DatabaseHelper.ExecuteNonQuery(query, parameters);
             return rowsAffected > 0;
         }
+
+        // Get the single latest reading goal details
+        public DataRow GetLatestGoalData()
+        {
+            string query = "SELECT TOP 1 TargetBooks, CompletedBooks FROM ReadingGoals ORDER BY GoalYear DESC";
+            DataTable dt = DatabaseHelper.ExecuteQuery(query);
+
+            if (dt.Rows.Count > 0)
+            {
+                return dt.Rows[0];
+            }
+            return null;
+        }
     }
 }

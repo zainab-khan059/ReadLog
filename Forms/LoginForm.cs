@@ -1,84 +1,60 @@
 using System;
-using System.Data.SqlClient;
 using System.Windows.Forms;
+using ReadLog.Controllers; // Connects to your middleman controllers
+using ReadLog.Utilities;   // Connects to your validation/security helpers
+using ReadLog.Models;      // Connects to your User model
 
-namespace ReadLog
+namespace ReadLog.Forms
 {
     public partial class LoginForm : Form
     {
-        // Database connection string
-        string connectionString =
-            @"Data Source=(localdb)\MSSQLLocalDB;
-              Initial Catalog=ReadLogDB;
-              Integrated Security=True";
+        // Create an instance of the UserController middleman
+        private UserController _userController = new UserController();
 
         public LoginForm()
         {
             InitializeComponent();
-
-            // Hide password characters
-            txtPassword.UseSystemPasswordChar = true;
         }
 
+        // 🛠️ The Login Button Click Event
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // Clear old error message
-            lblError.Text = "";
-
-            // Get user input
+            // 1. Grab inputs from your textboxes (Change txtUsername/txtPassword to match your textbox names!)
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // Check if fields are empty
-            if (username == "" || password == "")
+            // 2. Use Utilities to validate input first (No empty fields allowed)
+            if (!ValidationHelper.IsRequiredFieldPresent(username) || !ValidationHelper.IsRequiredFieldPresent(password))
             {
-                lblError.Text = "Please enter username and password.";
+                MessageBox.Show("Please enter both username and password.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                // 3. Ask the Controller to verify the user against the database
+                User loggedInUser = _userController.Login(username, password);
+
+                if (loggedInUser != null)
                 {
-                    conn.Open();
+                    MessageBox.Show($"Welcome back, {loggedInUser.Username}!", "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // SQL query
-                    string query = "SELECT COUNT(*) FROM Users " +
-                                   "WHERE Username=@username AND Password=@password";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-
-                    // Parameters
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-
-                    // Execute query
-                    int count = (int)cmd.ExecuteScalar();
-
-                    // If user exists
-                    if (count > 0)
-                    {
-                        MessageBox.Show("Login Successful!");
-
-                        // Open Dashboard
-                        DashboardForm dashboard = new DashboardForm();
-                        dashboard.Show();
-
-                        // Hide Login Form
-                        this.Hide();
-                    }
-                    else
-                    {
-                        lblError.Text = "Invalid username or password.";
-                    }
+                    // 4. Open your Dashboard and hide this login screen
+                    DashboardForm dashboard = new DashboardForm();
+                    dashboard.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    // If controller returns null, login failed
+                    MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Database Error: " + ex.Message);
+                // If anything goes wrong with the database connection, catch it here safely
+                MessageBox.Show($"An error occurred while connecting to the database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-       
     }
 }
