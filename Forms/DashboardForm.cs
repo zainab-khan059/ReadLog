@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReadLog.Database;
+using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
