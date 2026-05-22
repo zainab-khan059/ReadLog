@@ -1,143 +1,83 @@
-﻿using ReadLog.Database;
-using System;
-using System.Data.SqlClient;
+﻿using System;
+using System.Data;
 using System.Windows.Forms;
+using ReadLog.Controllers; // Connects to our middleman controllers
 
-namespace ReadLog
+namespace ReadLog.Forms
 {
     public partial class ReadingGoalForm : Form
     {
         private Form dashboard;
+
+        // Connect to our middleman tier controller
+        private GoalController _goalController = new GoalController();
+
         public ReadingGoalForm()
         {
             InitializeComponent();
-
             LoadGoalHistory();
         }
+
         public ReadingGoalForm(Form dash)
         {
             InitializeComponent();
             dashboard = dash;
+            LoadGoalHistory(); // Fixed to ensure history updates when opened via Dashboard!
         }
 
-        // LOAD SAMPLE HISTORY
+        // 1. LOAD REAL GOAL HISTORY FROM CONTROLLER
         private void LoadGoalHistory()
         {
             dgvHistory.Rows.Clear();
 
-            dgvHistory.Rows.Add(
-                "2024",
-                "10",
-                "12",
-                "Completed"
-            );
-
-            dgvHistory.Rows.Add(
-                "2025",
-                "15",
-                "9",
-                "In Progress"
-            );
-        }
-
-
-
-        // SAVE GOAL BUTTON
-        private void btnSaveGoal_Click(
-     object sender,
-     EventArgs e)
-        {
-            using (SqlConnection conn =
-                new SqlConnection(
-                    DatabaseHelper.connectionString))
+            try
             {
-                conn.Open();
+                DataTable dt = _goalController.GetGoalHistory();
 
-                int currentYear =
-                    DateTime.Now.Year;
-
-                // Check if year already exists
-                string checkQuery =
-                    @"SELECT COUNT(*) FROM ReadingGoals
-              WHERE GoalYear=@Year";
-
-                SqlCommand checkCmd =
-                    new SqlCommand(checkQuery, conn);
-
-                checkCmd.Parameters.AddWithValue(
-                    "@Year",
-                    currentYear
-                );
-
-                int exists =
-                    (int)checkCmd.ExecuteScalar();
-
-                SqlCommand cmd;
-
-                if (exists > 0)
+                foreach (DataRow row in dt.Rows)
                 {
-                    // UPDATE EXISTING GOAL
-                    string updateQuery =
-                        @"UPDATE ReadingGoals
-                  SET
-                    TargetBooks=@Target,
-                    CompletedBooks=@Completed
-                  WHERE GoalYear=@Year";
+                    int target = Convert.ToInt32(row["TargetBooks"]);
+                    int completed = Convert.ToInt32(row["CompletedBooks"]);
+                    string status = completed >= target ? "Completed" : "In Progress";
 
-                    cmd =
-                        new SqlCommand(updateQuery, conn);
+                    dgvHistory.Rows.Add(
+                        row["GoalYear"].ToString(),
+                        target.ToString(),
+                        completed.ToString(),
+                        status
+                    );
                 }
-                else
-                {
-                    // INSERT NEW GOAL
-                    string insertQuery =
-                        @"INSERT INTO ReadingGoals
-                (
-                    GoalYear,
-                    TargetBooks,
-                    CompletedBooks
-                )
-                VALUES
-                (
-                    @Year,
-                    @Target,
-                    @Completed
-                )";
-
-                    cmd =
-                        new SqlCommand(insertQuery, conn);
-                }
-
-                cmd.Parameters.AddWithValue(
-                    "@Year",
-                    currentYear
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@Target",
-                    numGoal.Value
-                );
-
-                cmd.Parameters.AddWithValue(
-                    "@Completed",
-                    numCompleted.Value
-                );
-
-                cmd.ExecuteNonQuery();
             }
-
-            MessageBox.Show(
-                "Reading goal saved successfully!"
-            );
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load reading goals: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-
-
-        private void ReadingGoalForm_FormClosed(object sender, FormClosedEventArgs e)
+        // 2. SAVE/UPDATE VIA CONTROLLER
+        private void btnSaveGoal_Click(object sender, EventArgs e)
         {
-            dashboard.Show();
+            int currentYear = DateTime.Now.Year;
+            int target = (int)numGoal.Value;
+            int completed = (int)numCompleted.Value;
+
+            try
+            {
+                bool success = _goalController.SaveOrUpdateGoal(currentYear, target, completed);
+
+                if (success)
+                {
+                    MessageBox.Show("Reading goal saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadGoalHistory(); // Refresh the grid automatically
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Could not save goal profile: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        // 3. CLEAR ENTIRE TABLE VIA CONTROLLER
         private void btnClearGoals_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -149,15 +89,24 @@ namespace ReadLog
 
             if (result == DialogResult.Yes)
             {
-                using (SqlConnection conn = new SqlConnection(DatabaseHelper.connectionString))
+                try
                 {
-                    conn.Open();
-                    string deleteQuery = "DELETE FROM ReadingGoals";
-                    SqlCommand cmd = new SqlCommand(deleteQuery, conn);
-                    cmd.ExecuteNonQuery();
+                    _goalController.ClearAllGoals();
+                    MessageBox.Show("All goals have been cleared.", "Cleared", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadGoalHistory(); // Refresh the empty grid
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to clear goal contents: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
 
-                MessageBox.Show("All goals have been cleared.");
+        private void ReadingGoalForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (dashboard != null)
+            {
+                dashboard.Show();
             }
         }
     }

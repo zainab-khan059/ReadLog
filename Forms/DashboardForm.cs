@@ -27,7 +27,7 @@ namespace ReadLog.Forms
                 int totalRead = _bookController.GetBookCountByStatus("Read");
                 int currentReading = _bookController.GetBookCountByStatus("Currently Reading");
                 List<string> recentBooks = _bookController.GetRecentBookTitles();
-                DataRow latestGoal = _goalController.GetLatestGoalData();
+                DataRow latestGoal = _goalController.GetLatestGoalData(DateTime.Now.Year);
 
                 // 3. UI Display: Update the counts labels
                 lblTotalRead.Text = totalRead.ToString();

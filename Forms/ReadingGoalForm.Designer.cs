@@ -1,4 +1,4 @@
-﻿namespace ReadLog
+﻿namespace ReadLog.Forms
 {
     partial class ReadingGoalForm
     {

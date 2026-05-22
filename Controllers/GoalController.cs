@@ -1,70 +1,65 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using ReadLog.Models;
 using ReadLog.Database;
 
 namespace ReadLog.Controllers
 {
     public class GoalController
     {
-        // Tool to get reading goals for a specific user
-        public List<Goal> GetGoalsByUserId(int userId)
+        // 1. Fetch all goal records to populate the history table
+        public DataTable GetGoalHistory()
         {
-            List<Goal> goalList = new List<Goal>();
-            string query = "SELECT * FROM Goals WHERE UserId = @UserId";
+            string query = "SELECT GoalYear, TargetBooks, CompletedBooks FROM ReadingGoals ORDER BY GoalYear DESC";
+            return DatabaseHelper.ExecuteQuery(query);
+        }
 
-            SqlParameter[] parameters = new SqlParameter[]
+        // 2. Save or update a reading goal for a specific year
+        public bool SaveOrUpdateGoal(int year, int targetBooks, int completedBooks)
+        {
+            // Check if a goal already exists for this year
+            string checkQuery = "SELECT COUNT(*) FROM ReadingGoals WHERE GoalYear = @Year";
+            SqlParameter[] checkParams = { new SqlParameter("@Year", year) };
+
+            DataTable dt = DatabaseHelper.ExecuteQuery(checkQuery, checkParams);
+            int exists = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0][0]) : 0;
+
+            string saveQuery;
+            if (exists > 0)
             {
-                new SqlParameter("@UserId", userId)
+                saveQuery = @"UPDATE ReadingGoals 
+                              SET TargetBooks = @Target, CompletedBooks = @Completed 
+                              WHERE GoalYear = @Year";
+            }
+            else
+            {
+                saveQuery = @"INSERT INTO ReadingGoals (GoalYear, TargetBooks, CompletedBooks) 
+                              VALUES (@Year, @Target, @Completed)";
+            }
+
+            SqlParameter[] saveParams = {
+                new SqlParameter("@Year", year),
+                new SqlParameter("@Target", targetBooks),
+                new SqlParameter("@Completed", completedBooks)
             };
+
+            return DatabaseHelper.ExecuteNonQuery(saveQuery, saveParams) > 0;
+        }
+
+        // 3. Clear all records from the goals table
+        public bool ClearAllGoals()
+        {
+            string query = "DELETE FROM ReadingGoals";
+            return DatabaseHelper.ExecuteNonQuery(query) > 0;
+        }
+        // 4. Fetch the target goal row tracking data specifically for the current year
+        public DataRow GetLatestGoalData(int year)
+        {
+            string query = "SELECT TargetBooks, CompletedBooks FROM ReadingGoals WHERE GoalYear = @Year";
+            SqlParameter[] parameters = { new SqlParameter("@Year", year) };
 
             DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
-
-            foreach (DataRow row in dt.Rows)
-            {
-                Goal goal = new Goal
-                {
-                    GoalID = Convert.ToInt32(row["Id"]),
-                    TargetBooks = Convert.ToInt32(row["TargetBooks"]),
-                    Year = Convert.ToDateTime(row["TargetDate"]).Year
-                };
-                goalList.Add(goal);
-            }
-
-            return goalList;
-        }
-
-        // Tool to add a new reading goal
-        public bool AddGoal(int userId, int targetBooks, DateTime targetDate)
-        {
-            if (targetBooks <= 0) return false;
-
-            string query = "INSERT INTO Goals (UserId, TargetBooks, TargetDate) VALUES (@UserId, @TargetBooks, @TargetDate)";
-
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@UserId", userId),
-                new SqlParameter("@TargetBooks", targetBooks),
-                new SqlParameter("@TargetDate", targetDate)
-            };
-
-            int rowsAffected = DatabaseHelper.ExecuteNonQuery(query, parameters);
-            return rowsAffected > 0;
-        }
-
-        // Get the single latest reading goal details
-        public DataRow GetLatestGoalData()
-        {
-            string query = "SELECT TOP 1 TargetBooks, CompletedBooks FROM ReadingGoals ORDER BY GoalYear DESC";
-            DataTable dt = DatabaseHelper.ExecuteQuery(query);
-
-            if (dt.Rows.Count > 0)
-            {
-                return dt.Rows[0];
-            }
-            return null;
+            return dt.Rows.Count > 0 ? dt.Rows[0] : null;
         }
     }
 }
