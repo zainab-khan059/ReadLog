@@ -1,0 +1,18 @@
+# Build folders
+bin/
+obj/ 
+
+# Generated files
+*.user
+*.suo
+*.sln.docstates
+
+# Project specific
+database/
+AppData.cs
+REPOSITORY.txt
+packages/
+
+# OS files
+.DS_Store
+Thumbs.db
