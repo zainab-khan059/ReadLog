@@ -11,8 +11,8 @@ This document outlines the steps required to set up, install, and deploy the Rea
 
 ## 2. Default Login Credentials
 If authentication is enabled on the startup view:
-* **Username / Email:** `admin@readlog.com` *(Change to match your test user)*
-* **Password:** `password123`
+* **Username:** `admin`
+* **Password:** `1234`
 
 ---
 
